@@ -1,13 +1,16 @@
+# Note: work-in-progress
+
 # Getting Started
 
-First, you need to connect the msp432 board using `openocd`
+First, you need to connect the msp432 board using `openocd`.
+Compile your code and launch openocd:
 
 ```bash
 >$ make
 >$ openocd -f board/ti_msp432_launchpad.cfg
 ```
 
-Now, we need to open a new terminal to run flash our binary onto hardware
+Now, we need to open a new terminal to flash our binary onto the MSP432.
 
 ```bash
 >$ arm-none-eabi-gdb
@@ -16,7 +19,11 @@ Now, we need to open a new terminal to run flash our binary onto hardware
 >$ (gdb) continue
 ```
 
-Instructions for gdb debugging:
+# Debugging
+
+You can also debug your application using `gdb`.
+Use the `file` command to set your gdb context to the .out file, for example, `hello_world.out`
+
 ```bash
 >$ arm-none-eabi-gdb
 >$ (gdb) remote target :3333
@@ -24,13 +31,16 @@ Instructions for gdb debugging:
 >$ (gdb) continue
 # hit ctrl-c to stop it wherever it lands
 >$ (gdb) print delay
->$ (gbb) set delay=1000
+>$ (gbb) set delay=10000
 >$ (gdb) continue
 # hit ctrl-c to stop it wherever it lands
 >$ (gdb) print delay
 >$ (gbb) set delay=1000
 >$ (gdb) continue
 ```
+
+You should now see that your LEDs cycle through colors much faster.
+This is some example terminal output for the program included in this example repo.
 
 ```bash
 Program received signal SIGINT, Interrupt.
@@ -57,12 +67,5 @@ Continuing.
 Program received signal SIGINT, Interrupt.
 0x0000031c in main () at src/main.c:107
 107             for (volatile uint32_t i = delay; i > 0; i--);
-(gdb) 
+(gdb)
 ```
-
-You should be able to see that these values have changed now.
-
-<!-- Or run a helper script to perform this task for you -->
-
-<!-- todo: modify our makefile to connect to target -->
-<!-- todo: modify our makefile to upload code to target -->

@@ -76,14 +76,10 @@ $(NAME).out: $(OBJECTS)
 	@ echo linking $@
 	@ $(LNK)  $(OBJECTS)  $(LFLAGS) -o $(NAME).out
 
-connect:
-	@ screen -dmS terminal1 zsh -c "echo 'hello session 1'"
-	@ screen -S terminal2 -X screen zsh -c "echo 'hello session 2'"
-
-# @ echo Connecting to MSP432 launchpad...
-# @ screen -S -d -m zsh -c "openocd -f board/ti_msp432_launchpad.cfg"
-# @ echo testing...
-# @ screen -S -d -m zsh -c "arm-none-eabi-gdb; target remote :3333; load ./out/hello_world.out; continue"
+# NOTE: work-in-progress, trying to automate openocd and arm-none-eabi-gdb
+# connect:
+# 	@ screen -dmS terminal1 zsh -c "echo 'hello session 1'"
+# 	@ screen -S terminal2 -X screen zsh -c "echo 'hello session 2'"
 
 clean:
 	@ echo Cleaning...
