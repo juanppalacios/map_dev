@@ -1,0 +1,9 @@
+# Build
+*.out
+*.map
+*.obj
+./target/**
+./out/**
+
+# Editor
+.project
